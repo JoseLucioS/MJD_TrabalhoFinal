@@ -6,8 +6,12 @@ public class InteractiveObject : MonoBehaviour
 {
     [SerializeField] private Vector3 openPosition, closedPosition;
     [SerializeField] private float animationTime;
-    [SerializeField] private bool isOpen = false;
+    [SerializeField] private bool isOpen = false, isLocked = false, opensUnlockableObject;
     [SerializeField] private MovementType movementType;
+    [SerializeField] private string objectMessage;
+    [SerializeField] private InteractiveObject myUnlockableObject;
+
+    private TextAnimator textAnimator;
 
     private enum MovementType
     {
@@ -19,6 +23,7 @@ public class InteractiveObject : MonoBehaviour
 
     void Start()
     {
+        textAnimator = FindObjectOfType<TextAnimator>();
         iTweenArgs = iTween.Hash();
         iTweenArgs.Add("position", openPosition);
         iTweenArgs.Add("time", animationTime);
@@ -28,31 +33,59 @@ public class InteractiveObject : MonoBehaviour
 
     public void PerformAction()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!isLocked)
         {
-            if (isOpen)
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                iTweenArgs["position"] = closedPosition;
-                iTweenArgs["rotation"] = closedPosition;
-            }
-            else
-            {
-                iTweenArgs["position"] = openPosition;
-                iTweenArgs["rotation"] = openPosition;
-            }
 
-            isOpen = !isOpen;
+                if (isOpen)
+                {
+                    iTweenArgs["position"] = closedPosition;
+                    iTweenArgs["rotation"] = closedPosition;
+                }
+                else
+                {
+                    iTweenArgs["position"] = openPosition;
+                    iTweenArgs["rotation"] = openPosition;
+                }
 
-            if (movementType == MovementType.SLIDE)
-            {
-                iTween.MoveTo(gameObject, iTweenArgs);
+                isOpen = !isOpen;
+                ToggleMyUnlockableObject(isOpen);
+
+                if (movementType == MovementType.SLIDE)
+                {
+                    iTween.MoveTo(gameObject, iTweenArgs);
+                }
+                else if (movementType == MovementType.ROTATE)
+                {
+                    iTween.RotateTo(gameObject, iTweenArgs);
+                }
+
             }
-            else if (movementType == MovementType.ROTATE)
-            {
-                iTween.RotateTo(gameObject, iTweenArgs);
-            }
-            
         }
+        else
+        {
+            textAnimator.ShowMessage(objectMessage);
+        }
+
         
+    }
+
+    private void ToggleMyUnlockableObject(bool shouldLock)
+    {
+        if (myUnlockableObject)
+        {
+            myUnlockableObject.ToggleIsLocked(false);
+            if (opensUnlockableObject)
+            {
+                myUnlockableObject.PerformAction();
+                myUnlockableObject.ToggleIsLocked(true);
+            }
+        }
+    }
+
+    public void ToggleIsLocked(bool newIsLocked)
+    {
+        isLocked = newIsLocked;
     }
 }
