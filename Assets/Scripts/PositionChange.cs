@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PositionChange : MonoBehaviour
 {
-    //public Vector3 positionChange;
+    //[SerializeField] private Vector3 positionChange;
     private int direction = 1;
     private float maxValue = 5f;
     private float minValue = -5f;

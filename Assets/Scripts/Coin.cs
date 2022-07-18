@@ -23,7 +23,7 @@ public class Coin : MonoBehaviour
         {
             FindObjectOfType<TextAnimator>().ShowMessage(valor + coinMessage);
             GameManager.Instance.AddCoins(valor);
-            Debug.Log(GameManager.Instance.GetCoins());
+            //Debug.Log(GameManager.Instance.GetCoins());
             Destroy(gameObject);
         }
     }
