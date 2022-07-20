@@ -5,18 +5,18 @@ using UnityEngine;
 public class PositionChange : MonoBehaviour
 {
     //[SerializeField] private Vector3 positionChange;
-    private int direction = 1;
-    private float maxValue = 5f;
-    private float minValue = -5f;
-    private float currentValue = 0f;
+    [SerializeField] private int direction = 1;
+    private float maxValue;
+    private float minValue;
+    private float currentValue;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        currentValue = transform.position.x;
+        maxValue = currentValue + 5;
+        minValue = currentValue - 5;
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentValue += direction * Time.deltaTime;

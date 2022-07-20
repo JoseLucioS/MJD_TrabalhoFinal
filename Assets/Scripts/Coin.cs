@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    [SerializeField] private int valor = 10;
+    [SerializeField] private int value = 10;
     private string coinMessage = " coins acquired!";
    
     void Start()
@@ -21,8 +21,8 @@ public class Coin : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            FindObjectOfType<TextAnimator>().ShowMessage(valor + coinMessage);
-            GameManager.Instance.AddCoins(valor);
+            FindObjectOfType<TextAnimator>().ShowMessage(value + coinMessage);
+            GameManager.Instance.AddCoins(value);
             //Debug.Log(GameManager.Instance.GetCoins());
             Destroy(gameObject);
         }
