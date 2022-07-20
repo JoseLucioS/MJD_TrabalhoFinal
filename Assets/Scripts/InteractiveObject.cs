@@ -7,7 +7,6 @@ public class InteractiveObject : MonoBehaviour
     [SerializeField] private Vector3 openPosition, closedPosition;
     [SerializeField] private float animationTime;
     [SerializeField] private bool isOpen = false, isLocked = false, opensUnlockableObject;
-    [SerializeField] private bool isTreasureChest;
     [SerializeField] private MovementType movementType;
     [SerializeField] private string objectMessage;
     [SerializeField] private InteractiveObject myUnlockableObject;
