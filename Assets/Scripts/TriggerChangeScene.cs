@@ -1,25 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class TriggerChangeScene : MonoBehaviour
 {
-    private enum Scenes { HOSPITAL, DUNGEON};
+    public Animator transition;
+    public float transitionTime = 1f;
+    private enum Scenes { 
+        HOSPITAL, 
+        DUNGEON 
+    };
+
     [SerializeField] private Scenes toSceneName;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             if (toSceneName == Scenes.HOSPITAL)
             {
-                GameManager.Instance.LoadScene("HospitalScene");
+                LoadNextLevel("HospitalScene");
             }
             else if (toSceneName == Scenes.DUNGEON)
             {
-                GameManager.Instance.LoadScene("DungeonScene");
+                LoadNextLevel("DungeonScene");
             }
             
         }
     }
 
+    public void LoadNextLevel(string sceneName)
+    {
+        StartCoroutine(LoadLevel(sceneName));
+    }
+
+    IEnumerator LoadLevel(string sceneName)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene(sceneName);
+    }
 }

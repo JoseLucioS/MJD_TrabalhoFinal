@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             coins = 0;
+            GameObject.DontDestroyOnLoad(this.gameObject);
         }
     }
 
@@ -31,10 +31,5 @@ public class GameManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
-    }
-
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
     }
 }
