@@ -27,6 +27,12 @@
     além de superar uns pequenos desafios de jumping.  
     Esteja atento a pequenas dicas que podem aparecer quando se está jogando.
 
+## Controles:
+- Teclas W, A, S, D para movimentação;
+- Mouse movimenta a câmera;
+- tecla Espaço para pular;
+- tecla F para interagir com certos objetos (báu, porta, alavanca);
+
 ## Assets utilizados:
     Todos os assets para o jogo ou foram criados por conta própria ou foram baixados gratuitamente da asset store da Unity. Aqui estão os principais utilizados:
     - iTween;
