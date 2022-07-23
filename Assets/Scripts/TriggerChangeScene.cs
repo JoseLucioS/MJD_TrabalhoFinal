@@ -10,7 +10,8 @@ public class TriggerChangeScene : MonoBehaviour
     public float transitionTime = 1f;
     private enum Scenes { 
         HOSPITAL, 
-        DUNGEON 
+        DUNGEON,
+        GAMEOVER
     };
 
     [SerializeField] private Scenes toSceneName;
@@ -26,6 +27,10 @@ public class TriggerChangeScene : MonoBehaviour
             else if (toSceneName == Scenes.DUNGEON)
             {
                 LoadNextLevel("DungeonScene");
+            }
+            else if (toSceneName == Scenes.GAMEOVER)
+            {
+                LoadNextLevel("GameOverScene");
             }
             
         }
